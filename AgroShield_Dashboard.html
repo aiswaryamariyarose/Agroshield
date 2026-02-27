@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgroShield Dashboard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:  #22c55e;
+      --soil:   #a16207;
+      --red:    #ef4444;
+      --amber:  #f59e0b;
+      --blue:   #38bdf8;
+      --bg:     #0b1120;
+      --card:   #111827;
+      --border: rgba(255,255,255,0.08);
+      --text:   #f1f5f9;
+      --muted:  rgba(255,255,255,0.4);
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    header {
+      padding: 28px 40px 20px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 14px; }
+    .logo-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+    }
+    .owner-name {
+      font-size: 22px; font-weight: 800; letter-spacing: 0.3px;
+    }
+    .owner-sub {
+      font-size: 12px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 2px; margin-top: 2px;
+    }
+    .status-pill {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 30px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.25);
+      font-size: 12px; font-weight: 600; color: var(--green);
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: blink 1.4s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      gap: 32px;
+    }
+
+    .subtitle {
+      font-size: 13px; color: var(--muted); letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* ── CARDS ROW ── */
+    .cards {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .card {
+      flex: 1 1 360px;
+      max-width: 420px;
+      background: var(--card);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      padding: 32px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: 24px;
+    }
+    .card.intrusion::before { background: radial-gradient(circle at top left, rgba(239,68,68,0.08), transparent 60%); }
+    .card.soil::before      { background: radial-gradient(circle at top left, rgba(161,98,7,0.1), transparent 60%); }
+    .card:hover { transform: translateY(-6px); }
+    .card.intrusion:hover { box-shadow: 0 20px 50px rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.3); }
+    .card.soil:hover      { box-shadow: 0 20px 50px rgba(161,98,7,0.2);  border-color: rgba(161,98,7,0.35); }
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; margin-bottom: 20px;
+    }
+    .card.intrusion .card-icon { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.2); }
+    .card.soil      .card-icon { background: rgba(161,98,7,0.15);  border: 1px solid rgba(161,98,7,0.25); }
+
+    .card-title {
+      font-size: 20px; font-weight: 800; margin-bottom: 8px;
+    }
+    .card.intrusion .card-title { color: #fca5a5; }
+    .card.soil      .card-title { color: #fcd34d; }
+
+    .card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+
+    .card-preview {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .preview-chip {
+      padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .card.intrusion .preview-chip {
+      background: rgba(239,68,68,0.1); color: #fca5a5; border: 1px solid rgba(239,68,68,0.2);
+    }
+    .card.soil .preview-chip {
+      background: rgba(161,98,7,0.12); color: #fcd34d; border: 1px solid rgba(161,98,7,0.25);
+    }
+
+    .card-cta {
+      margin-top: 24px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600;
+    }
+    .card.intrusion .card-cta { color: #f87171; }
+    .card.soil      .card-cta { color: #fbbf24; }
+
+    /* ── MODAL OVERLAY ── */
+    .overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      animation: fadeIn 0.2s ease;
+    }
+    .overlay.open { display: flex; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    .modal {
+      background: #0f1923;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      width: 100%; max-width: 680px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 36px;
+      animation: slideUp 0.25s ease;
+      position: relative;
+    }
+    @keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+    .modal-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      color: var(--muted); font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .modal-header { margin-bottom: 28px; }
+    .modal-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 14px;
+    }
+    .modal-title { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+    .modal-sub   { font-size: 13px; color: var(--muted); }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 12px; margin-top: 24px;
+    }
+
+    /* ── DATA ROWS ── */
+    .data-grid { display: flex; flex-direction: column; gap: 10px; }
+    .data-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .data-label { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .data-value { font-size: 14px; font-weight: 700; font-family: 'Space Mono', monospace; }
+
+    /* ── BAR ── */
+    .bar-wrap { margin-top: 6px; }
+    .bar-bg {
+      height: 6px; border-radius: 3px; background: rgba(255,255,255,0.06);
+      overflow: hidden; margin-top: 8px;
+    }
+    .bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+
+    /* ── INTRUSION LOG ── */
+    .log-list { display: flex; flex-direction: column; gap: 8px; }
+    .log-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .log-badge {
+      padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; flex-shrink: 0;
+    }
+    .badge-human  { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+    .badge-animal { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.25); }
+    .log-time  { font-size: 11px; color: var(--muted); font-family: 'Space Mono', monospace; margin-left: auto; }
+    .log-conf  { font-size: 11px; color: var(--muted); }
+
+    /* ── CROP SUGGESTIONS ── */
+    .crop-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+    .crop-card {
+      flex: 1 1 140px;
+      padding: 16px; border-radius: 14px;
+      background: rgba(34,197,94,0.06);
+      border: 1px solid rgba(34,197,94,0.15);
+      text-align: center;
+    }
+    .crop-card.primary {
+      background: rgba(34,197,94,0.12);
+      border-color: rgba(34,197,94,0.3);
+    }
+    .crop-emoji { font-size: 28px; margin-bottom: 8px; }
+    .crop-name  { font-size: 14px; font-weight: 700; color: #86efac; }
+    .crop-reason{ font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+    .crop-best  { font-size: 10px; color: var(--green); font-weight: 700; margin-top: 6px; letter-spacing: 1px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 20px;
+      font-size: 11px; color: rgba(255,255,255,0.15);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════ -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">🌾</div>
+    <div>
+      <div class="owner-name">Sania's AgroShield</div>
+      <div class="owner-sub">Smart Agriculture Monitor</div>
+    </div>
+  </div>
+  <div class="status-pill">
+    <span class="dot"></span>
+    System Active
+  </div>
+</header>
+
+<!-- ══ MAIN ════════════════════════════════════════════ -->
+<main>
+  <div class="subtitle">Click a block to view live Arduino data</div>
+
+  <div class="cards">
+
+    <!-- INTRUSION CARD -->
+    <div class="card intrusion" onclick="openModal('intrusion')">
+      <div class="card-icon">🚨</div>
+      <div class="card-title">Intrusion Detection</div>
+      <div class="card-desc">
+        Real-time surveillance log from webcam and motion sensors. Detects humans and animals entering the farm boundary.
+      </div>
+      <div class="card-preview">
+        <span class="preview-chip">👤 Human Detection</span>
+        <span class="preview-chip">🐄 Animal Detection</span>
+        <span class="preview-chip">📋 Event Log</span>
+      </div>
+      <div class="card-cta">View Intrusion Log →</div>
+    </div>
+
+    <!-- SOIL CARD -->
+    <div class="card soil" onclick="openModal('soil')">
+      <div class="card-icon">🌱</div>
+      <div class="card-title">Soil Analysis</div>
+      <div class="card-desc">
+        Live soil readings from Arduino sensors — moisture content, nutrient levels, and texture classification with crop suggestions.
+      </div>
+      <div class="card-preview">
+        <span class="preview-chip">💧 Moisture</span>
+        <span class="preview-chip">🧪 Nutrients</span>
+        <span class="preview-chip">🪨 Texture</span>
+        <span class="preview-chip">🌾 Crop Tips</span>
+      </div>
+      <div class="card-cta">View Soil Data →</div>
+    </div>
+
+  </div>
+</main>
+
+<footer>AgroShield · Arduino-powered Smart Agriculture System</footer>
+
+<!-- ══ INTRUSION MODAL ════════════════════════════════ -->
+<div class="overlay" id="intrusion-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('intrusion')">✕</button>
+
+    <div class="modal-header">
+      <div class="modal-icon" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.2);">🚨</div>
+      <div class="modal-title" style="color:#fca5a5;">Intrusion Detection Log</div>
+      <div class="modal-sub">Data received from Arduino motion sensor + webcam</div>
+    </div>
+
+    <!-- Summary row -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:4px;">
+      <div style="flex:1;min-width:120px;padding:14px 18px;border-radius:12px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.18);text-align:center;">
+        <div style="font-size:28px;font-weight:800;color:#f87171;font-family:'Space Mono',monospace;" id="human-count">3</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Human Events</div>
+      </div>
+      <div style="flex:1;min-width:120px;padding:14px 18px;border-radius:12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.18);text-align:center;">
+        <div style="font-size:28px;font-weight:800;color:#fbbf24;font-family:'Space Mono',monospace;" id="animal-count">5</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Animal Events</div>
+      </div>
+      <div style="flex:1;min-width:120px;padding:14px 18px;border-radius:12px;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.18);text-align:center;">
+        <div style="font-size:28px;font-weight:800;color:#38bdf8;font-family:'Space Mono',monospace;" id="total-count">8</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Total Today</div>
+      </div>
+    </div>
+
+    <div class="section-label">Recent Events</div>
+    <div class="log-list" id="intrusion-log"></div>
+
+    <div class="section-label">Sensor Readings</div>
+    <div class="data-grid">
+      <div class="data-row">
+        <span class="data-label">📡 Motion Sensor</span>
+        <span class="data-value" style="color:#4ade80;">Active</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">📷 Camera</span>
+        <span class="data-value" style="color:#4ade80;">Running</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">🔔 Buzzer</span>
+        <span class="data-value" style="color:#fbbf24;">Standby</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">⚙️ Servo (Scarer)</span>
+        <span class="data-value" style="color:#fbbf24;">Idle</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SOIL MODAL ═════════════════════════════════════ -->
+<div class="overlay" id="soil-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('soil')">✕</button>
+
+    <div class="modal-header">
+      <div class="modal-icon" style="background:rgba(161,98,7,0.15);border:1px solid rgba(161,98,7,0.25);">🌱</div>
+      <div class="modal-title" style="color:#fcd34d;">Soil Analysis</div>
+      <div class="modal-sub">Live data from Arduino soil moisture sensor</div>
+    </div>
+
+    <div class="section-label">Moisture Content</div>
+    <div class="data-grid">
+      <div class="data-row">
+        <div style="width:100%;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="data-label">💧 Soil Moisture</span>
+            <span class="data-value" id="moisture-val" style="color:#38bdf8;">62%</span>
+          </div>
+          <div class="bar-bg bar-wrap">
+            <div class="bar-fill" id="moisture-bar" style="width:62%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Nutrient Levels</div>
+    <div class="data-grid">
+      <div class="data-row">
+        <div style="width:100%;">
+          <div style="display:flex;justify-content:space-between;">
+            <span class="data-label">🟢 Nitrogen (N)</span>
+            <span class="data-value" id="n-val" style="color:#4ade80;">74 mg/kg</span>
+          </div>
+          <div class="bar-bg bar-wrap">
+            <div class="bar-fill" id="n-bar" style="width:74%;background:linear-gradient(90deg,#16a34a,#4ade80);"></div>
+          </div>
+        </div>
+      </div>
+      <div class="data-row">
+        <div style="width:100%;">
+          <div style="display:flex;justify-content:space-between;">
+            <span class="data-label">🟠 Phosphorus (P)</span>
+            <span class="data-value" id="p-val" style="color:#fb923c;">48 mg/kg</span>
+          </div>
+          <div class="bar-bg bar-wrap">
+            <div class="bar-fill" id="p-bar" style="width:48%;background:linear-gradient(90deg,#ea580c,#fb923c);"></div>
+          </div>
+        </div>
+      </div>
+      <div class="data-row">
+        <div style="width:100%;">
+          <div style="display:flex;justify-content:space-between;">
+            <span class="data-label">🟣 Potassium (K)</span>
+            <span class="data-value" id="k-val" style="color:#c084fc;">83 mg/kg</span>
+          </div>
+          <div class="bar-bg bar-wrap">
+            <div class="bar-fill" id="k-bar" style="width:83%;background:linear-gradient(90deg,#7c3aed,#c084fc);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Soil Texture</div>
+    <div class="data-grid">
+      <div class="data-row">
+        <span class="data-label">🪨 Texture Type</span>
+        <span class="data-value" id="texture-val" style="color:#fcd34d;">Loamy</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">⚗️ pH Level</span>
+        <span class="data-value" id="ph-val" style="color:#4ade80;">6.8 (Neutral)</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">🌡️ Soil Temperature</span>
+        <span class="data-value" id="temp-val" style="color:#fb923c;">28°C</span>
+      </div>
+    </div>
+
+    <div class="section-label">Crop Suggestions</div>
+    <div class="crop-grid" id="crop-grid"></div>
+
+  </div>
+</div>
+
+<script>
+  // ── Sample Arduino data (replace with real serial data) ──
+  const ARDUINO_DATA = {
+    moisture: 62,
+    nitrogen: 74,
+    phosphorus: 48,
+    potassium: 83,
+    texture: "Loamy",
+    ph: 6.8,
+    temperature: 28,
+  };
+
+  const INTRUSION_LOG = [
+    { type: "Human",  time: "08:42 AM", confidence: 91 },
+    { type: "Animal", time: "07:15 AM", confidence: 83 },
+    { type: "Animal", time: "06:50 AM", confidence: 76 },
+    { type: "Human",  time: "Yesterday 11:20 PM", confidence: 88 },
+    { type: "Animal", time: "Yesterday 09:05 PM", confidence: 79 },
+    { type: "Animal", time: "Yesterday 04:30 PM", confidence: 72 },
+    { type: "Human",  time: "Yesterday 02:10 PM", confidence: 94 },
+    { type: "Animal", time: "Yesterday 10:45 AM", confidence: 68 },
+  ];
+
+  // ── Crop suggestion engine ──
+  function getCrops(moisture, nitrogen, phosphorus, potassium, texture) {
+    const avg = (nitrogen + phosphorus + potassium) / 3;
+
+    if (moisture < 25) {
+      return [
+        { emoji: "🌾", name: "Millet",   reason: "Thrives in dry soil, drought resistant",      best: true  },
+        { emoji: "🌿", name: "Sorghum",  reason: "Tolerates low moisture very well",             best: false },
+        { emoji: "🥜", name: "Peanut",   reason: "Sandy dry soil is ideal",                      best: false },
+      ];
+    } else if (moisture < 45) {
+      return [
+        { emoji: "🌾", name: "Wheat",    reason: "Moderate moisture is perfect for wheat",       best: true  },
+        { emoji: "🌽", name: "Maize",    reason: "Good yield in semi-dry conditions",            best: false },
+        { emoji: "🌿", name: "Barley",   reason: "Hardy grain, suits this moisture range",       best: false },
+      ];
+    } else if (moisture < 70) {
+      if (avg > 65) {
+        return [
+          { emoji: "🍅", name: "Tomato",   reason: "Nutrient-rich moist loam is perfect",       best: true  },
+          { emoji: "🌻", name: "Sunflower",reason: "High nutrients + medium moisture = great",   best: false },
+          { emoji: "🥦", name: "Broccoli", reason: "Loves nutrient-dense moist soil",           best: false },
+        ];
+      }
+      return [
+        { emoji: "🌻", name: "Sunflower", reason: "Ideal in moist loamy soil",                  best: true  },
+        { emoji: "🌸", name: "Cotton",    reason: "Moderate moisture suits cotton well",         best: false },
+        { emoji: "🌽", name: "Maize",     reason: "Excellent yield in these conditions",         best: false },
+      ];
+    } else {
+      return [
+        { emoji: "🍚", name: "Rice",    reason: "High moisture soil is ideal for paddy",        best: true  },
+        { emoji: "🌿", name: "Taro",    reason: "Loves waterlogged or very wet soil",           best: false },
+        { emoji: "🌱", name: "Jute",    reason: "Thrives in high-moisture, warm fields",        best: false },
+      ];
+    }
+  }
+
+  // ── Render intrusion log ──
+  function renderIntrusionLog() {
+    const container = document.getElementById("intrusion-log");
+    container.innerHTML = INTRUSION_LOG.map(item => `
+      <div class="log-item">
+        <span class="log-badge ${item.type === 'Human' ? 'badge-human' : 'badge-animal'}">
+          ${item.type === 'Human' ? '👤 Human' : '🐄 Animal'}
+        </span>
+        <span class="log-conf" style="font-size:12px;color:var(--muted);">Confidence: <strong style="color:#fff">${item.confidence}%</strong></span>
+        <span class="log-time">${item.time}</span>
+      </div>
+    `).join("");
+  }
+
+  // ── Render soil data ──
+  function renderSoilData() {
+    const d = ARDUINO_DATA;
+
+    document.getElementById("moisture-val").textContent = d.moisture + "%";
+    document.getElementById("moisture-bar").style.width = d.moisture + "%";
+
+    document.getElementById("n-val").textContent = d.nitrogen + " mg/kg";
+    document.getElementById("n-bar").style.width  = Math.min(d.nitrogen, 100) + "%";
+
+    document.getElementById("p-val").textContent = d.phosphorus + " mg/kg";
+    document.getElementById("p-bar").style.width  = Math.min(d.phosphorus, 100) + "%";
+
+    document.getElementById("k-val").textContent = d.potassium + " mg/kg";
+    document.getElementById("k-bar").style.width  = Math.min(d.potassium, 100) + "%";
+
+    document.getElementById("texture-val").textContent = d.texture;
+    document.getElementById("ph-val").textContent = d.ph + (d.ph < 6 ? " (Acidic)" : d.ph > 7.5 ? " (Alkaline)" : " (Neutral)");
+    document.getElementById("temp-val").textContent = d.temperature + "°C";
+
+    const crops = getCrops(d.moisture, d.nitrogen, d.phosphorus, d.potassium, d.texture);
+    document.getElementById("crop-grid").innerHTML = crops.map(c => `
+      <div class="crop-card ${c.best ? 'primary' : ''}">
+        <div class="crop-emoji">${c.emoji}</div>
+        <div class="crop-name">${c.name}</div>
+        <div class="crop-reason">${c.reason}</div>
+        ${c.best ? '<div class="crop-best">★ BEST MATCH</div>' : ''}
+      </div>
+    `).join("");
+  }
+
+  // ── Modal controls ──
+  function openModal(type) {
+    if (type === 'intrusion') renderIntrusionLog();
+    if (type === 'soil')      renderSoilData();
+    document.getElementById(type + '-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(type) {
+    document.getElementById(type + '-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  document.querySelectorAll('.overlay').forEach(el => {
+    el.addEventListener('click', e => {
+      if (e.target === el) closeModal(el.id.replace('-modal', ''));
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.overlay.open').forEach(el => {
+      closeModal(el.id.replace('-modal',''));
+    });
+  });
+
+  // ── Simulate live Arduino updates every 5 seconds ──
+  setInterval(() => {
+    ARDUINO_DATA.moisture    = Math.max(10, Math.min(95, ARDUINO_DATA.moisture    + (Math.random() * 6 - 3)));
+    ARDUINO_DATA.nitrogen    = Math.max(10, Math.min(100, ARDUINO_DATA.nitrogen   + (Math.random() * 4 - 2)));
+    ARDUINO_DATA.phosphorus  = Math.max(10, Math.min(100, ARDUINO_DATA.phosphorus + (Math.random() * 4 - 2)));
+    ARDUINO_DATA.potassium   = Math.max(10, Math.min(100, ARDUINO_DATA.potassium  + (Math.random() * 4 - 2)));
+    ARDUINO_DATA.temperature = Math.max(15, Math.min(45,  ARDUINO_DATA.temperature + (Math.random() * 2 - 1)));
+    ARDUINO_DATA.moisture    = Math.round(ARDUINO_DATA.moisture);
+    ARDUINO_DATA.nitrogen    = Math.round(ARDUINO_DATA.nitrogen);
+    ARDUINO_DATA.phosphorus  = Math.round(ARDUINO_DATA.phosphorus);
+    ARDUINO_DATA.potassium   = Math.round(ARDUINO_DATA.potassium);
+    ARDUINO_DATA.temperature = Math.round(ARDUINO_DATA.temperature * 10) / 10;
+
+    if (document.getElementById('soil-modal').classList.contains('open')) renderSoilData();
+  }, 5000);
+</script>
+</body>
+</html>
