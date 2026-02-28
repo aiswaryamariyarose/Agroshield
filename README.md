@@ -1,7 +1,9 @@
- Kala_Sahaayi
+# Kala Sahaayi
+![POSTER](https://github.com/user-attachments/assets/1b249f59-8c35-4bea-baf9-96a6aa4e678b)
 
-Kala Sahaayi 🎯
-#Basic Details
+
+
+# Basic Details
 
 Team Name: Kaapi Addicts
 
@@ -11,21 +13,26 @@ Member 1: Aiswarya Mariya Rose- [MITS]
 
 Member 2: Sania Susan Reji - [MITS]
 
-Hosted Project Link: https:
+Hosted Project Link: https://drive.google.com/file/d/17V3BidqnooIWotr87QdwmgptobOrhIdD/view?usp=drivesdk
 
-Project Description
+
+# VIDEO DEMO LINK
+https://drive.google.com/file/d/17V3BidqnooIWotr87QdwmgptobOrhIdD/view?usp=drivesdk
+
+
+# Project Description
 
 Kala Sahaayi is a smart agriculture safety system that protects crops from wild animals using sensors and alerts. It also monitors water levels to ensure optimal irrigation automatically and suggest the crops to be planted in the farm land
 
-The Problem Statement
+# The Problem Statement
 
 Farmers face losses due to wild animals invading crops, and inefficient irrigation often leads to water wastage and damage of water pump or insufficient water for plants.
 
-The Solution
+# The Solution
 
 Kala sahaayi uses sensors to detect animal intrusion and alerts the farmer via LED and buzzer. It also monitors water levels using ultrasonic sensors and automatically controls the water pump, reducing crop loss and water wastage.
 
-Technical Details
+# Technical Details
 Technologies / Components Used
 
 Software:
@@ -46,7 +53,7 @@ Specifications: Arduino Uno (ATmega328P, 16MHz), OLED 0.96” I2C, Servo SG90 9g
 
 Tools Required: Jumper wires, Breadboard, Power supply, Screwdriver, Soldering kit (optional)
 
-Features
+# Features
 
 Animal Detection: Detects wild animals approaching crops using camera.
 
@@ -58,7 +65,7 @@ OLED Display: Shows real-time animal intrusion or water level data.
 
 Touch Sensor Mode Switch: Switch between water monitoring and animal detection display.
 
-Implementation
+# Implementation
 Software
 
 Installation:
@@ -99,7 +106,7 @@ Breadboard
 Power Supply
 
 
-Circuit Setup:
+# Circuit Setup:
 
 Connect IR sensors to D2 and D3.
 
@@ -119,7 +126,7 @@ Power everything via 5V and GND from Arduino.
 
 
 
-Project Documentation
+# Project Documentation
 <img width="1899" height="894" alt="Screenshot 2026-02-28 083444" src="https://github.com/user-attachments/assets/468e6d26-7559-413a-bc38-906e24d109ba" />
 
 <img width="842" height="773" alt="Screenshot 2026-02-28 083454" src="https://github.com/user-attachments/assets/29028054-a609-410a-b229-c43b2591f294" />
@@ -132,8 +139,7 @@ Project Documentation
 ![3](https://github.com/user-attachments/assets/884dee5f-df49-4c5d-87f2-1b3170c0188b)
 ![4](https://github.com/user-attachments/assets/6b440008-f2bc-4b12-bc77-8ee557a27da0)
 
-VIDEO DEMO LINK
-https://drive.google.com/file/d/17V3BidqnooIWotr87QdwmgptobOrhIdD/view?usp=drivesdk
+
 
 
 
@@ -181,7 +187,7 @@ Build Photos:
 
 
 
-Bill of Materials (BOM)
+# Bill of Materials (BOM)
 Component	Quantity	Specifications	Price (₹)	Source/Link
 Arduino Uno	1	ATmega328P, 16MHz	450	[Link]
 IR Sensor	2	Digital, 5V	100	[Link]
@@ -198,7 +204,7 @@ Power Supply	1	5V, 2A Adapter	300	[Link]
 
 Total Estimated Cost: ₹2060
 
-Assembly Instructions
+# Assembly Instructions
 
 Prepare Components → Check specs and lay them out.
 
@@ -245,9 +251,9 @@ Project Demo Video
 
 Demo Video Link
 
-Demonstrates real-time animal detection, water monitoring, and alert system.
+https://drive.google.com/file/d/17V3BidqnooIWotr87QdwmgptobOrhIdD/view?usp=drivesdk
 
-AI Tools Used (Optional)
+AI Tools Used 
 
 Tool Used: ChatGPT
 
