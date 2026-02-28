@@ -1,4 +1,4 @@
-# Kala_Sahaayi
+ Kala_Sahaayi
 
 Kala Sahaayi 🎯
 #Basic Details
@@ -120,13 +120,21 @@ Power everything via 5V and GND from Arduino.
 
 
 Project Documentation
-Software Screenshots
+<img width="1899" height="894" alt="Screenshot 2026-02-28 083444" src="https://github.com/user-attachments/assets/468e6d26-7559-413a-bc38-906e24d109ba" />
+
+<img width="842" height="773" alt="Screenshot 2026-02-28 083454" src="https://github.com/user-attachments/assets/29028054-a609-410a-b229-c43b2591f294" />
+<img width="842" height="766" alt="Screenshot 2026-02-28 083514" src="https://github.com/user-attachments/assets/428777a0-f902-42eb-ad5e-ba2c6e7e1b7b" />
+
+
 ![1](https://github.com/user-attachments/assets/fa41324a-5f6c-4846-af46-1927168f0f03)
 ![2](https://github.com/user-attachments/assets/41a27d2c-9a2c-4464-a2fb-8db2cc2ac265)
 
 ![3](https://github.com/user-attachments/assets/884dee5f-df49-4c5d-87f2-1b3170c0188b)
 ![4](https://github.com/user-attachments/assets/6b440008-f2bc-4b12-bc77-8ee557a27da0)
+
+VIDEO DEMO LINK
 https://drive.google.com/file/d/17V3BidqnooIWotr87QdwmgptobOrhIdD/view?usp=drivesdk
+
 
 
 Diagrams
@@ -161,12 +169,17 @@ Detailed schematic for hardware setup
 Build Photos:
 
 ![Team](Add team photo path)
+<img width="1899" height="894" alt="Screenshot 2026-02-28 083444" src="https://github.com/user-attachments/assets/2de54bc2-83c2-4db0-87d4-04c94373c56b" />
+<img width="842" height="773" alt="Screenshot 2026-02-28 083454" src="https://github.com/user-attachments/assets/2380f9ba-cfa9-4191-ac70-63239d19acf7" />
+<img width="842" height="766" alt="Screenshot 2026-02-28 083514" src="https://github.com/user-attachments/assets/d23a22c0-62ed-4d39-9326-5dc84d90ab1f" />
 
-![Components](Add photo of components path)
+![Uploa![1](https://github.com/user-attachments/assets/c134b1c8-6ca1-4da1-b11f-47026d5ab5c2)
+![2](https://github.com/user-attachments/assets/76b91df8-1573-4628-ab2c-8e8a76a3f507)
+![3](https://github.com/user-attachments/assets/a108f3e7-ccd5-407f-9fb3-b805727445e8)
+![4](https://github.com/user-attachments/assets/0a0edb79-6bce-4de8-b545-ff6f6fcd4fa0)
+![5](https://github.com/user-attachments/assets/b2574aa9-cf92-4b5f-ae0a-2316b3d802f8)
 
-![Build](Add photos during assembly path)
 
-![Final](Add photo of final product path)
 
 Bill of Materials (BOM)
 Component	Quantity	Specifications	Price (₹)	Source/Link
