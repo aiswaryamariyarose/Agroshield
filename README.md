@@ -121,14 +121,13 @@ Power everything via 5V and GND from Arduino.
 
 Project Documentation
 Software Screenshots
+![1](https://github.com/user-attachments/assets/fa41324a-5f6c-4846-af46-1927168f0f03)
+![2](https://github.com/user-attachments/assets/41a27d2c-9a2c-4464-a2fb-8db2cc2ac265)
 
+![3](https://github.com/user-attachments/assets/884dee5f-df49-4c5d-87f2-1b3170c0188b)
+![4](https://github.com/user-attachments/assets/6b440008-f2bc-4b12-bc77-8ee557a27da0)
+https://drive.google.com/file/d/17V3BidqnooIWotr87QdwmgptobOrhIdD/view?usp=drivesdk
 
-
-Screenshot 2: ![Water Monitoring](Add screenshot2 path)
-Displays water tank level below threshold
-
-Screenshot 3: ![Dashboard](Add screenshot3 path)
-Shows data on AgroShield web dashboard
 
 Diagrams
 
