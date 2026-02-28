@@ -1,1 +1,256 @@
-# Agroshield
+# Kala_Sahaayi
+
+Kala Sahaayi 🎯
+#Basic Details
+
+Team Name: Kaapi Addicts
+
+Team Members:
+
+Member 1: Aiswarya Mariya Rose- [MITS]
+
+Member 2: Sania Susan Reji - [MITS]
+
+Hosted Project Link: https:
+
+Project Description
+
+Kala Sahaayi is a smart agriculture safety system that protects crops from wild animals using sensors and alerts. It also monitors water levels to ensure optimal irrigation automatically and suggest the crops to be planted in the farm land
+
+The Problem Statement
+
+Farmers face losses due to wild animals invading crops, and inefficient irrigation often leads to water wastage and damage of water pump or insufficient water for plants.
+
+The Solution
+
+Kala sahaayi uses sensors to detect animal intrusion and alerts the farmer via LED and buzzer. It also monitors water levels using ultrasonic sensors and automatically controls the water pump, reducing crop loss and water wastage.
+
+Technical Details
+Technologies / Components Used
+
+Software:
+
+Languages: Python, Arduino C/C++
+
+Frameworks: None (Python scripts with libraries)
+
+Libraries: OpenCV, dlib, Adafruit_SSD1306, Servo, JSON
+
+Tools: Arduino IDE, VS Code, Git
+
+Hardware:
+
+Main Components: Arduino Uno, IR sensor, Ultrasonic sensor, Servo motor, Buzzer, LED, OLED display, Relay module, Touch sensor
+
+Specifications: Arduino Uno (ATmega328P, 16MHz), OLED 0.96” I2C, Servo SG90 9g, Relay 5V
+
+Tools Required: Jumper wires, Breadboard, Power supply, Screwdriver, Soldering kit (optional)
+
+Features
+
+Animal Detection: Detects wild animals approaching crops using camera.
+
+Alerts: LED and buzzer alert farmer immediately.
+
+Water Monitoring: Measures water levels in tanks and stops pumps when below 20%.
+
+OLED Display: Shows real-time animal intrusion or water level data.
+
+Touch Sensor Mode Switch: Switch between water monitoring and animal detection display.
+
+Implementation
+Software
+
+Installation:
+
+pip install -r requirements.txt
+
+Run:
+
+python agroshield_surveillance.py
+
+
+Hardware
+
+Components Required:
+
+Arduino Uno
+
+IR Sensors 
+
+Ultrasonic Sensor
+
+Servo Motor
+
+Buzzer
+
+LED
+
+OLED Display
+
+Touch Sensor
+
+Relay Module
+
+Jumper wires
+
+Breadboard
+
+Power Supply
+
+
+Circuit Setup:
+
+Connect IR sensors to D2 and D3.
+
+Ultrasonic sensor TRIG to D4, ECHO to D5.
+
+Servo motor to D9.
+
+Buzzer to D6, LED to D7 (with resistor).
+
+Relay module IN to D8.
+
+OLED SDA → A4, SCL → A5.
+
+Touch sensor SIG → D10.
+
+Power everything via 5V and GND from Arduino.
+
+
+
+Project Documentation
+Software Screenshots
+
+
+
+Screenshot 2: ![Water Monitoring](Add screenshot2 path)
+Displays water tank level below threshold
+
+Screenshot 3: ![Dashboard](Add screenshot3 path)
+Shows data on AgroShield web dashboard
+
+Diagrams
+
+System Architecture:
+
+Sensors → Arduino → OLED/Buzzer/LED/Relay → Dashboard
+
+Data flow: Animal detection & water level data sent to local Python scripts → JSON → Dashboard
+
+Application Workflow:
+
+Sensors detect input
+
+Arduino processes signals
+
+Alerts displayed via LED, buzzer, and OLED
+
+Water pump controlled automatically if levels low
+
+
+Hardware
+
+Schematic & Circuit:
+
+![Circuit Diagram](Add circuit diagram path)
+Shows Arduino connections with sensors, buzzer, LED, relay, servo, and OLED
+
+![Schematic](Add schematic path)
+Detailed schematic for hardware setup
+
+Build Photos:
+
+![Team](Add team photo path)
+
+![Components](Add photo of components path)
+
+![Build](Add photos during assembly path)
+
+![Final](Add photo of final product path)
+
+Bill of Materials (BOM)
+Component	Quantity	Specifications	Price (₹)	Source/Link
+Arduino Uno	1	ATmega328P, 16MHz	450	[Link]
+IR Sensor	2	Digital, 5V	100	[Link]
+Ultrasonic Sensor	1	HC-SR04, 5V	150	[Link]
+Servo Motor	1	SG90, 9g	200	[Link]
+Buzzer	1	5V Piezo	50	[Link]
+LED	5	5mm, 20mA	5 each	[Link]
+OLED Display	1	0.96" I2C, 128x64	400	[Link]
+Touch Sensor	1	TTP223 Module	100	[Link]
+Relay Module	1	5V Single Channel	150	[Link]
+Jumper Wires	20	Male-to-male	50	[Link]
+Breadboard	1	830 points	100	[Link]
+Power Supply	1	5V, 2A Adapter	300	[Link]
+
+Total Estimated Cost: ₹2060
+
+Assembly Instructions
+
+Prepare Components → Check specs and lay them out.
+
+Build Power Supply → Connect Arduino 5V and GND to breadboard rails.
+
+Add LEDs → Connect resistors, cathodes to GND, anodes to Arduino pins.
+
+Connect IR and Ultrasonic sensors → Pins D2-D5.
+
+Connect Servo → Pin D9.
+
+Connect Buzzer & Relay → Pins D6, D8.
+
+Connect OLED → SDA/A4, SCL/A5.
+
+Connect Touch Sensor → Pin D10.
+
+Power up Arduino → Upload AgroShield.ino.
+
+Test sensors individually → Verify OLED, LED, buzzer, and water pump control.
+
+Command Reference (Python Scripts)
+
+Basic Usage:
+
+python agroshield_surveillance.py
+
+Options:
+
+-h, --help → Show help
+
+-v, --verbose → Verbose output
+
+-o, --output FILE → Save output JSON
+
+Examples:
+
+# Basic usage
+python agroshield_surveillance.py
+
+# Save output to JSON
+python agroshield_surveillance.py -o intrusion_data.json
+Project Demo Video
+
+Demo Video Link
+
+Demonstrates real-time animal detection, water monitoring, and alert system.
+
+AI Tools Used (Optional)
+
+Tool Used: ChatGPT
+
+Purpose: Debugging and documentation formatting
+
+Human Contributions: Architecture design, hardware integration, code implementation, testing, UI/UX design
+
+Team Contributions
+
+Aiswarya: Arduino coding, sensors integration, OLED & buzzer setup
+
+Sania: Python scripts, dashboard design, testing, documentation
+
+License
+
+This project is licensed under the MIT License – see License file for details.
+
+Made with ❤️ at TinkerHub
