@@ -1,0 +1,106 @@
+{
+    "human_count": 1258,
+    "animal_count": 0,
+    "events": [
+        {
+            "type": "Human",
+            "confidence": 25.6,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 55.4,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 82.8,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 93.7,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 25.9,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 64.3,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 83.3,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 93.7,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 28.9,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 32.1,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 56.9,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 80.9,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 92.5,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 33.8,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 33.9,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 55.7,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 81.7,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 92.7,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 25.4,
+            "time": "04:43 AM"
+        },
+        {
+            "type": "Human",
+            "confidence": 28.2,
+            "time": "04:43 AM"
+        }
+    ]
+}
